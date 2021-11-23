@@ -110,10 +110,10 @@ const _ = {
   },
   
   /**
-   * findKey Returns the key of the first element predicate returns truthy
+   * findKey Returns the key of the first element predicate returns truthy.
    * @param {Object} object The object to inspect.
    * @param {Function} predicate The function invoked per iteration.
-   * @returns {string|undefined} Returns the key of the matched element,
+   * @returns {string|undefined} Returns the key of the matched element.
    */
   
   findKey: function(object, predicate) {
@@ -135,8 +135,40 @@ const _ = {
    * @returns {Array} Returns the slice of `array`.
   */
   
-  drop: function() {
-    
+  drop: function(array, number) {
+    if (!number) {
+      number = 1;
+    }
+    let droppedArray = array.slice(number);
+    return droppedArray;
+  },
+  
+  /**
+   * dropWhile Returns new array with elements dropped from beginning of original array.
+   * @param {Array} array The array to query.
+   * @param {number} [n=1] The number of elements to drop.
+   * @returns {Array} Returns the slice of `array`.
+  */
+  
+  dropWhile: function(array, predicate) {
+    const callback = (element, index) => {
+      return !predicate(element, index, array);
+    }
+    let dropNumber = array.findIndex(callback);
+    const droppedArray = this.drop(array, dropNumber);
+    return droppedArray;
+  },
+  
+  chunk: function(array, size) {
+    if (!size) {
+      size = 1;
+    }
+    let chunkArrays = [];
+    for (let i=0; i<array.length; i+=size) {
+      let chunkArray = array.slice(i, i+size);
+      chunkArrays.push(chunkArray);
+    }
+    return chunkArrays;
   }
   
   };
@@ -146,5 +178,4 @@ const _ = {
   
   // Do not write or modify code below this line.
   module.exports = _;
-  
   
