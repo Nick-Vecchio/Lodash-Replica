@@ -1,4 +1,4 @@
-const _ = require('../_.js');
+const _ = require('../string-utilities.js');
 const assert = require('./assert.js');
 
 const TEST_NAME = '_.pad()';
